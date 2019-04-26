@@ -22,4 +22,6 @@ steps:
     goals: 'package'
 - script:
     echo $(Build.ArtifactStagingDirectory)
+    echo $(Build.BinariesDirectory)
+    echo $(Build.Repository.LocalPath)
     
