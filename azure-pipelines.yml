@@ -20,12 +20,13 @@ steps:
     publishJUnitResults: false
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+
 - task: ArchiveFiles@2
   displayName: "Archive files"
   inputs:
       rootFolderOrFile: "$(Build.Repository.LocalPath)"
       includeRootFolder: false
-      archiveFile: "$(Build.Repository.LocalPath)/target/*.war"
+      archiveFile: "$(Build.Repository.LocalPath)/target/helloworld.war"
 
 - task: PublishBuildArtifacts@1
   inputs:
