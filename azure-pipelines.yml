@@ -27,13 +27,13 @@ steps:
       includeRootFolder: false
       archiveFile: "$(Build.Repository.LocalPath)/target/*.war"
 
-# - task: PublishBuildArtifacts@1
-#   inputs:
-#     PathtoPublish: '$(System.DefaultWorkingDirectory)'
-# name: 'drop'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)'
+name: 'drop'
 
 # - script:
 #     echo $(Build.ArtifactStagingDirectory)
 #     echo $(Build.BinariesDirectory)
 #     echo $(Build.Repository.LocalPath)
-    
+#     echo $(System.DefaultWorkingDirectory)
