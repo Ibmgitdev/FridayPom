@@ -22,4 +22,4 @@ steps:
     goals: 'package'
 
 - task: CmdLine@2
-  echo "$(Build.ArtifactStagingDirectory)"
+  echo $(Build.ArtifactStagingDirectory)
