@@ -20,6 +20,5 @@ steps:
     publishJUnitResults: false
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-
-- task: CmdLine@2
-  echo $(Build.ArtifactStagingDirectory)
+- script:
+  echo "$Build.ArtifactStagingDirectory"
