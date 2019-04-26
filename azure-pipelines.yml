@@ -25,7 +25,7 @@ steps:
   inputs:
       rootFolderOrFile: "$(Build.Repository.LocalPath)"
       includeRootFolder: false
-      archiveFile: "$(Build.Repository.LocalPath)/$(Build.BuildId).zip"
+      archiveFile: "$(Build.Repository.LocalPath)/target/*.war"
 
 # - task: PublishBuildArtifacts@1
 #   inputs:
