@@ -68,9 +68,9 @@ steps:
          <IM_V_TRANSPORT></IM_V_TRANSPORT>
       </urn:ZVSTS_CI_CHECK>
    </soapenv:Body>
-</soapenv:Envelope>''>''$(System.DefaultWorkingDirectory)/target/sapp.json'''
+</soapenv:Envelope>''>''$(System.DefaultWorkingDirectory)/target/sapp.xml'''
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)/target/sapp.json'
-  name: 'jsonFil'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/target/sapp.xml'
+  
