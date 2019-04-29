@@ -33,8 +33,8 @@ steps:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/helloworld.war'
 name: 'drop'
 
-# - script:
-#     echo $(Build.ArtifactStagingDirectory)
+  - script:
+     echo $(Build.ArtifactStagingDirectory)
 #     echo $(Build.BinariesDirectory)
 #     echo $(Build.Repository.LocalPath)
 #     echo $(System.DefaultWorkingDirectory)
