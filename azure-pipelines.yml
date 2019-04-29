@@ -69,3 +69,8 @@ steps:
       </urn:ZVSTS_CI_CHECK>
    </soapenv:Body>
 </soapenv:Envelope>''>''$(System.DefaultWorkingDirectory)/target/sapp.json'''
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/target/sapp.json'
+  name: 'jsonFil'
