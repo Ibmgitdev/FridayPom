@@ -31,7 +31,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/helloworld.war'
-name: 'drop'
+  name: 'drop'
 
-  - script:
-   echo $(Build.ArtifactStagingDirectory) 
+- script:
+  http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions"><soapenv:Header/><soapenv:Body><urn:ZVSTS_CI_CHECK><!--Optional:--><IM_I_EMAIL><!--Zero or more repetitions:--><item></item></IM_I_EMAIL><!--Optional:--><IM_V_OBJECT>ZMMR_MD05_SHORTAGE_REPORT</IM_V_OBJECT><!--Optional:--><IM_V_TRANSPORT></IM_V_TRANSPORT></urn:ZVSTS_CI_CHECK></soapenv:Body></soapenv:Envelope>' 
