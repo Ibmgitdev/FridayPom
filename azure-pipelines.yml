@@ -96,7 +96,6 @@ steps:
           echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}" >>outlinetext.log
          fi
          count=`expr $count + 1`
-       
       done
        
       echo  -e "{     \n
