@@ -154,5 +154,5 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'result=`cat /home/vsts/work/1/s/target/saap.xml | awk -F "[><]" ''''/EX_V_RESULT/{print $3}''''`
-            echo "Result: $result"'
+    script: 'result=`$(cat /home/vsts/work/1/s/target/saap.xml | awk -F "[><]" ''''/EX_V_RESULT/{print $3}'''')`
+            echo "$result"'
