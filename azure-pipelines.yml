@@ -28,13 +28,6 @@ steps:
       includeRootFolder: false
       archiveFile: "$(Build.Repository.LocalPath)/target/helloworld.war"
 
-- task: ArchiveFiles@2
-  displayName: "Archive files"
-  inputs:
-      rootFolderOrFile: "$(Build.Repository.LocalPath)"
-      includeRootFolder: false
-      archiveFile: "$(Build.Repository.LocalPath)/target/saap.xml"
-
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/helloworld.war'
@@ -57,7 +50,14 @@ steps:
          <IM_V_TRANSPORT></IM_V_TRANSPORT>
       </urn:ZVSTS_CI_CHECK>
    </soapenv:Body>
-</soapenv:Envelope>'' > saap.xml'
+</soapenv:Envelope>'' > $(System.DefaultWorkingDirectory)/target/saap.xml'
+
+- task: ArchiveFiles@2
+  displayName: "Archive files"
+  inputs:
+      rootFolderOrFile: "$(Build.Repository.LocalPath)"
+      includeRootFolder: false
+      archiveFile: "$(Build.Repository.LocalPath)/target/saap.xml"
 
 - task: PublishBuildArtifacts@1
   inputs:
