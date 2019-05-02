@@ -70,6 +70,7 @@ steps:
     echo $(Build.Repository.LocalPath)
     echo $(System.DefaultWorkingDirectory)
     echo "pooooooop"
+    cat /home/vsts/work/1/s/target/saap.xml | awk -F "[><]" ''/EX_V_RESULT/{print $3}''
 
 # Upper code is proper don't touch=========================
 # This is bash script======================================
@@ -151,7 +152,7 @@ steps:
 - task: CmdLine@2
   inputs:
     script: 'count=1
-            result=`cat /home/vsts/work/1/s/target/saap.xml | awk -F "[><]" ''''/EX_V_RESULT/{print $3}''''`
+            result=`cat /$(System.DefaultWorkingDirectory)/saap.xml | awk -F "[><]" ''''/EX_V_RESULT/{print $3}''''`
             echo "Result: $result"
              
             item="$(grep -c ''''</item>'''' /$(System.DefaultWorkingDirectory)/target/saap.xml)"
