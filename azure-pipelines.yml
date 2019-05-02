@@ -78,7 +78,7 @@ steps:
     targetType: 'inline'
     script: 'count=1
       cat $(System.DefaultWorkingDirectory)/target/saap.xml
-      result=`cat $(System.DefaultWorkingDirectory)/target/| awk -F "[><]" ''/EX_V_RESULT/{print $3}''`
+      result=`cat $(System.DefaultWorkingDirectory)/target/saap.xml| awk -F "[><]" ''/EX_V_RESULT/{print $3}''`
       echo "Result: $result"
        
       item="$(grep -c ''</item>'' /$(System.DefaultWorkingDirectory)/target/saap.xml)"
