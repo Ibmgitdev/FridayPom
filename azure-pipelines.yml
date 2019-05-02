@@ -70,10 +70,10 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'count=1
-      result=`cat $(System.DefaultWorkingDirectory)/target/SAAP.xml | awk -F "[><]" "/EX_V_RESULT/{print $3}"`
+      result=`cat $(System.DefaultWorkingDirectory)/target/saap.xml | awk -F "[><]" "/EX_V_RESULT/{print $3}"`
       echo "Result:$result"
        
-      item="$(grep -c "</item>" $(System.DefaultWorkingDirectory)/target/SAAP.xml)"
+      item="$(grep -c "</item>" $(System.DefaultWorkingDirectory)/target/saap.xml)"
       echo "TotalItem:$item"
        
       cat $(System.DefaultWorkingDirectory)/target/SAAP.xml  | awk -F "[><]"  "/TEXT|LINE/{print $3}" |sed "$!N;s/\n/;/">linetext.log
