@@ -74,18 +74,18 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'count=1
-      result=`cat $(System.DefaultWorkingDirectory)/target/SAAP.xml | awk -F "[><]" ''/EX_V_RESULT/{print $3}''`
+      result=`cat $(System.DefaultWorkingDirectory)/target/SAAP.xml | awk -F "[><]" "/EX_V_RESULT/{print $3}"`
       echo "Result:$result"
        
-      item="$(grep -c ''</item>'' $(System.DefaultWorkingDirectory)/target/SAAP.xml)"
+      item="$(grep -c "</item>" $(System.DefaultWorkingDirectory)/target/SAAP.xml)"
       echo "TotalItem:$item"
        
-      cat SAAP.xml  | awk -F "[><]"  ''/TEXT|LINE/{print $3}''  |sed ''$!N;s/\n/;/''>linetext.log
+      cat $(System.DefaultWorkingDirectory)/target/SAAP.xml  | awk -F "[><]"  "/TEXT|LINE/{print $3}" |sed "$!N;s/\n/;/">linetext.log
        
       cat linetext.log |while read linedata
       do
-         TEXT=$(echo $linedata |awk -F ";" ''{print $1}'')
-         LINE=$(echo $linedata |awk -F ";" ''{print $2}'')
+         TEXT=$(echo $linedata |awk -F ";" "{print $1}")
+         LINE=$(echo $linedata |awk -F ";" "{print $2}")
          if [ $item -ne $count ]
          then
            echo  -e "\n\t\"issues$count\":{\n\t\t\"line\":\"$LINE\",\n\t\t \"text\":\"$TEXT\"\n}," >>outlinetext.log
