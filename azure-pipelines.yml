@@ -68,5 +68,4 @@ steps:
          <IM_V_TRANSPORT></IM_V_TRANSPORT>
       </urn:ZVSTS_CI_CHECK>
    </soapenv:Body>
-</soapenv:Envelope>''>''
-
+</soapenv:Envelope>''>'''
