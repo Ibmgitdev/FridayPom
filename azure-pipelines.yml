@@ -77,13 +77,13 @@ steps:
 #   inputs:
 #     targetType: 'inline'
 #     script: 'count=1
-#       result=`cat /home/vsts/work/1/s/target/saap.xml | awk -F "[><]" "/EX_V_RESULT/{print $3}"`
+#       result=`cat $(Build.Repository.LocalPath)/target/saap.xml | awk -F "[><]" "/EX_V_RESULT/{print $3}"`
 #       echo "Result:$result"
        
-#       item="$(grep -c "</item>" /home/vsts/work/1/s/target/saap.xml)"
+#       item="$(grep -c "</item>" $(Build.Repository.LocalPath)/target/saap.xml)"
 #       echo "TotalItem:$item"
        
-#       cat /home/vsts/work/1/s/target/saap.xml | awk -F "[><]"  "/TEXT|LINE/{print $3}" |sed "$!N;s/\n/;/">linetext.log
+#       cat $(Build.Repository.LocalPath)/target/saap.xml | awk -F "[><]"  "/TEXT|LINE/{print $3}" |sed "$!N;s/\n/;/">linetext.log
        
 #       cat linetext.log |while read linedata
 #       do
@@ -103,7 +103,7 @@ steps:
 #           \"itemTotal\":\"$item\", \n\t
 #           \"result\":\"$result\", \n\t
 #           $(cat outlinetext.log)
-#       }\n">/home/vsts/work/1/s/target/test.json
+#       }\n">/$(Build.Repository.LocalPath)/target/test.json
        
 #       rm -f outlinetext.log
 #       rm -f linetext.log'
