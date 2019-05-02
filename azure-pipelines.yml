@@ -52,7 +52,10 @@ steps:
    </soapenv:Body>
 </soapenv:Envelope>'''
 
-
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/target/saap.xml'
+  name: 'drop'
 
 # - task: Bash@3
 #   inputs:
