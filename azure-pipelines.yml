@@ -151,6 +151,6 @@ steps:
 #            rm -f linetext.log'
 
 - script:
-    result=`cat /home/vsts/work/1/s/target/saap.xml| awk -F "[><]" ''/EX_V_RESULT/{print $3}''`
+    result=`cat /home/vsts/work/1/s/target/saap.xml| awk -F "[><]" '/EX_V_RESULT/{print $3}`
     echo "$result"
       
