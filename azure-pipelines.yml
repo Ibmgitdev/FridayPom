@@ -69,6 +69,7 @@ steps:
     echo $(Build.BinariesDirectory)
     echo $(Build.Repository.LocalPath)
     echo $(System.DefaultWorkingDirectory)
+    echo "pooooooop"
 
 # Upper code is proper don't touch=========================
 # This is bash script======================================
@@ -76,7 +77,7 @@ steps:
 # - task: Bash@3
 #   inputs:
 #     targetType: 'inline'
-#     script: 'echo "my name"'
+#     script: echo "my========= name"
 
 # - task: Bash@3
 #   inputs:
