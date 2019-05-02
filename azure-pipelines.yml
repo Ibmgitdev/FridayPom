@@ -73,8 +73,7 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script:'
-      count=1
+    script:'count=1
       result=`cat SAAP.xml | awk -F "[><]" ''/EX_V_RESULT/{print $3}''`
       echo "Result:$result"
        
@@ -104,4 +103,5 @@ steps:
       }\n">$(System.DefaultWorkingDirectory)/target/test.json
        
       rm -f outlinetext.log
-           rm -f linetext.log'
+      rm -f linetext.log
+    '
