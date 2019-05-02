@@ -70,8 +70,7 @@ steps:
     echo $(Build.Repository.LocalPath)
     echo $(System.DefaultWorkingDirectory)
     echo "pooooooop"
-    cat /$(System.DefaultWorkingDirectory)/target/saap.xml
-    cat /home/vsts/work/1/s/target/saap.xml
+    
 
 # Upper code is proper don't touch=========================
 # This is bash script======================================
@@ -118,7 +117,7 @@ steps:
 # - task: Bash@3
 #   inputs:
 #     targetType: 'inline'
-#     script: '#!/bin/bash 
+#     script: 'cat /home/vsts/work/1/s/target/saap.xml' 
 #      set -x
 #       count=1
 #       result=`cat /home/vsts/work/1/s/target/saap.xml| awk -F "[><]" ''/EX_V_RESULT/{print $3}''`
@@ -152,3 +151,8 @@ steps:
 #       rm -f outlinetext.log
 #            rm -f linetext.log'
 
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'result=`cat /home/vsts/work/1/s/target/saap.xml | awk -F "[><]" ''''/EX_V_RESULT/{print $3}''''`
+            echo "Result: $result"'
