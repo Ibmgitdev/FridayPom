@@ -151,6 +151,3 @@ steps:
 #       rm -f outlinetext.log
 #            rm -f linetext.log'
 
-- script:
-    cat /home/vsts/work/1/s/target/saap.xml
-      
