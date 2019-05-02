@@ -28,6 +28,13 @@ steps:
       includeRootFolder: false
       archiveFile: "$(Build.Repository.LocalPath)/target/helloworld.war"
 
+- task: ArchiveFiles@2
+  displayName: "Archive files"
+  inputs:
+      rootFolderOrFile: "$(Build.Repository.LocalPath)"
+      includeRootFolder: false
+      archiveFile: "$(Build.Repository.LocalPath)/target/saap.xml"
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/helloworld.war'
