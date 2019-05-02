@@ -111,37 +111,37 @@ steps:
 #==============================================
 #==============================================
 
-# - task: Bash@3
-#   inputs:
-#     targetType: 'inline'
-#     script: 'count=1
-#       result=`cat $(System.DefaultWorkingDirectory)/target/saap.xml | awk -F "[><]" "/EX_V_RESULT/{print $3}"`
-#       echo "Result:$result"
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'count=1
+      result=`cat $(System.DefaultWorkingDirectory)/target/drop/saap.xml | awk -F "[><]" "/EX_V_RESULT/{print $3}"`
+      echo "Result:$result"
        
-#       item="$(grep -c "</item>" $(System.DefaultWorkingDirectory)/target/saap.xml)"
-#       echo "TotalItem:$item"
+      item="$(grep -c "</item>" $(System.DefaultWorkingDirectory)/target/drop/saap.xml)"
+      echo "TotalItem:$item"
        
-#       cat $(System.DefaultWorkingDirectory)/target/SAAP.xml  | awk -F "[><]"  "/TEXT|LINE/{print $3}"  |sed "$!N;s/\n/;/">linetext.log
+      cat $(System.DefaultWorkingDirectory)/target/drop/SAAP.xml  | awk -F "[><]"  "/TEXT|LINE/{print $3}"  |sed "$!N;s/\n/;/">linetext.log
        
-#       cat linetext.log |while read linedata
-#       do
-#          TEXT=$(echo $linedata |awk -F ";" "{print $1}")
-#          LINE=$(echo $linedata |awk -F ";" "{print $2}")
-#          if [ $item -ne $count ]
-#          then
-#            echo  -e "\n\t\"issues$count\":{\n\t\t\"line\":\"$LINE\",\n\t\t \"text\":\"$TEXT\"\n}," >>outlinetext.log
-#          else
-#           echo  -e "\n\t\"issues$count\":{\n\t\t\"line\":\"$LINE\",\n\t\t \"text\":\"$TEXT\"\n}" >>outlinetext.log
-#          fi
-#          count=`expr $count + 1`
+      cat linetext.log |while read linedata
+      do
+         TEXT=$(echo $linedata |awk -F ";" "{print $1}")
+         LINE=$(echo $linedata |awk -F ";" "{print $2}")
+         if [ $item -ne $count ]
+         then
+           echo  -e "\n\t\"issues$count\":{\n\t\t\"line\":\"$LINE\",\n\t\t \"text\":\"$TEXT\"\n}," >>outlinetext.log
+         else
+          echo  -e "\n\t\"issues$count\":{\n\t\t\"line\":\"$LINE\",\n\t\t \"text\":\"$TEXT\"\n}" >>outlinetext.log
+         fi
+         count=`expr $count + 1`
        
-#       done
+      done
        
-#       echo  -e "{     \n
-#           \"itemTotal\":\"$item\", \n\t
-#           \"result\":\"$result\", \n\t
-#           $(cat outlinetext.log)
-#       }\n">$(System.DefaultWorkingDirectory)/target/test.json
+      echo  -e "{     \n
+          \"itemTotal\":\"$item\", \n\t
+          \"result\":\"$result\", \n\t
+          $(cat outlinetext.log)
+      }\n">$(System.DefaultWorkingDirectory)/target/test.json
        
-#       rm -f outlinetext.log
-#       rm -f linetext.log'
+      rm -f outlinetext.log
+      rm -f linetext.log'
