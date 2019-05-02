@@ -152,5 +152,5 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: '#! /bin/bash
+    script: '#!/bin/bash
       echo "test" '
