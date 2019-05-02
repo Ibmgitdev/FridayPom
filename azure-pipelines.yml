@@ -121,7 +121,7 @@ steps:
       item="$(grep -c "</item>" $(System.DefaultWorkingDirectory)/target/drop/saap.xml)"
       echo "TotalItem:$item"
        
-      cat $(System.DefaultWorkingDirectory)/target/drop/SAAP.xml  | awk -F "[><]"  "/TEXT|LINE/{print $3}"  |sed "$!N;s/\n/;/">linetext.log
+      cat $(System.DefaultWorkingDirectory)/target/drop/saap.xml  | awk -F "[><]"  "/TEXT|LINE/{print $3}"  |sed "$!N;s/\n/;/">linetext.log
        
       cat linetext.log |while read linedata
       do
