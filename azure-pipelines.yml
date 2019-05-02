@@ -131,7 +131,7 @@ steps:
           \"itemTotal\":\"$item\", \n\t
           \"result\":\"$result\", \n\t
           $(cat outlinetext.log)
-      }\n">test.json
+      }\n">$(System.DefaultWorkingDirectory)/target/test.json
        
       rm -f outlinetext.log
       rm -f linetext.log'
