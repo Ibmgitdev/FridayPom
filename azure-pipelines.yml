@@ -74,10 +74,10 @@ steps:
 # Upper code is proper don't touch=========================
 # This is bash script======================================
 
-# - task: Bash@3
-#   inputs:
-#     targetType: 'inline'
-#     script: echo "my========= name"
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: echo "my========= name"
 
 # - task: Bash@3
 #   inputs:
