@@ -70,7 +70,6 @@ steps:
     echo $(Build.Repository.LocalPath)
     echo $(System.DefaultWorkingDirectory)
     echo "pooooooop"
-    cat /home/vsts/work/1/s/target/saap.xml | awk -F "[><]" ''/EX_V_RESULT/{print $3}''
 
 # Upper code is proper don't touch=========================
 # This is bash script======================================
