@@ -55,7 +55,7 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/saap.xml'
-  name: 'drop1'
+  name: 'drill'
 
 # - task: Bash@3
 #   inputs:
