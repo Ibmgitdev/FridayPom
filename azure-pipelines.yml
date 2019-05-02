@@ -135,7 +135,7 @@ steps:
          fi
          count=`expr $count + 1`
        
-      done
+      "done"
        
       echo  -e "{     \n
           \"itemTotal\":\"$item\", \n\t
