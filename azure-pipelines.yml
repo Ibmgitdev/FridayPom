@@ -76,6 +76,41 @@ steps:
     ls -l
     awk -F "[><]" ''/EX_V_RESULT/{print $3}'' /home/vsts/work/1/s/target/saap.xml
     
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'count=1
+      result=`cat /home/vsts/work/1/s/target/saap.xml | awk -v FS="(<EX_V_RESULT>|</EX_V_RESULT>)" ''{print $2}''`
+      echo "Result: $result"
+       
+      #item="$(grep -c ''</item>'' $xml_file)"
+      item="$(egrep -o ''</item>'' $xml_file  |wc -l)"
+      echo "TotalItem: $item"
+      cat /home/vsts/work/1/s/target/saap.xml | egrep -oE ''(<LINE>[^<]*</LINE>|<TEXT>[^<]*</TEXT>)''  | sed  -e ''s:<LINE>::g'' -e ''s:</LINE>::g'' -e ''s:<TEXT>::g'' -e ''s:</TEXT>::g'' |sed ''$!N;s/\n/;/''>linetext.log
+       
+      cat linetext.log |while read linedata
+      do
+         TEXT=$(echo $linedata |awk -F ";" ''{print $1}'')
+         LINE=$(echo $linedata |awk -F ";" ''{print $2}'')
+         if [ $item -ne $count ]
+         then
+           echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}," >>outlinetext.log
+         else
+          echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}" >>outlinetext.log
+         fi
+         count=`expr $count + 1`
+       
+      done
+       
+      echo  -e "{     \n
+          \"itemTotal\": \"$item\", \n\t
+          \"result\": \"$result\", \n\t
+          $(cat outlinetext.log)
+      }\n">/home/vsts/work/1/s/target/test.json
+       
+      rm -f outlinetext.log
+      rm -f linetext.log'
+
   # wc /home/vsts/work/1/s/target/saap.xml
 
 # sudo cat $($(System.DefaultWorkingDirectory)/target/saap.xml)
