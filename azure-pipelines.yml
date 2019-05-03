@@ -69,12 +69,13 @@ steps:
     cd $(System.DefaultWorkingDirectory)
 - script:
     ls -l
-    pwd
 - script:
-    cd $(System.DefaultWorkingDirectory)/target
     pwd
-- script:
-    ls -l
+# - script:
+#     cd $(System.DefaultWorkingDirectory)/target
+#     pwd
+# - script:
+#     ls -l
     # cat $(System.DefaultWorkingDirectory)/target/saap.xml
     # sudo cat $($(System.DefaultWorkingDirectory)/target/saap.xml)
 
