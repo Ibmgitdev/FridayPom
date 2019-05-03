@@ -67,7 +67,7 @@ steps:
 - script:
     echo "popo"
     
-    cat /home/vsts/work/1/s/target/saap.xml
+    cat '$(System.DefaultWorkingDirectory)/target/saap.xml'
 
 # Upper code is proper don't touch=========================
 # This is bash script======================================
