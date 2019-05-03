@@ -70,11 +70,10 @@ steps:
     echo $(Build.Repository.LocalPath)
     echo $(System.DefaultWorkingDirectory)
     echo "pop"
-    # cat home/vsts/work/1/s/target/saap.xml
-    # cat $(Build.Repository.LocalPath)/target/saap.xml
-    # echo "popo"
-    # cat /$(Build.Repository.LocalPath)/target/saap.xml
-    
+    cat /home/vsts/work/1/s/target/saap.xml
+    cat $(Build.Repository.LocalPath)/target/saap.xml
+    echo "popo"
+    cat /$(Build.Repository.LocalPath)/target/saap.xml
 
 # Upper code is proper don't touch=========================
 # This is bash script======================================
