@@ -70,6 +70,8 @@ steps:
     echo $(Build.Repository.LocalPath)
     echo $(System.DefaultWorkingDirectory)
     echo "pop"
+    cat /home/vsts/work/1/s/target/saap.xml
+    cat /$(System.DefaultWorkingDirectory)/target/saap.xml
     
 
 # Upper code is proper don't touch=========================
@@ -79,8 +81,6 @@ steps:
   inputs:
     targetType: 'inline'
     script: echo "my========= name"
-      cat /home/vsts/work/1/s/target/saap.xml
-      cat /$(System.DefaultWorkingDirectory)/target/saap.xml
 
 - task: Bash@3
   inputs:
