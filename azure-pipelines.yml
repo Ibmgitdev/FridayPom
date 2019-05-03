@@ -69,7 +69,7 @@ steps:
 - script:
     cat $(System.DefaultWorkingDirectory)/target/saap.xml
 - script:
-    sudo cat `$(System.DefaultWorkingDirectory)/target/saap.xml`
+    sudo cat $($(System.DefaultWorkingDirectory)/target/saap.xml)
 
 # Upper code is proper don't touch=========================
 # This is bash script======================================
