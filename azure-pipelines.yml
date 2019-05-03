@@ -77,7 +77,7 @@ steps:
 #     pwd
 - script:
     ls -l
-    # cat $(System.DefaultWorkingDirectory)/target/saap.xml
+    cat /home/vsts/work/1/s/target/saap.xml
     # sudo cat $($(System.DefaultWorkingDirectory)/target/saap.xml)
 
 # This is bash script======================================
