@@ -70,10 +70,10 @@ steps:
     echo $(Build.Repository.LocalPath)
     echo $(System.DefaultWorkingDirectory)
     echo "pop"
-    cat home/vsts/work/1/s/target/saap.xml
-    cat $(Build.Repository.LocalPath)/target/saap.xml
-    echo "popo"
-    cat /$(Build.Repository.LocalPath)/target/saap.xml
+    # cat home/vsts/work/1/s/target/saap.xml
+    # cat $(Build.Repository.LocalPath)/target/saap.xml
+    # echo "popo"
+    # cat /$(Build.Repository.LocalPath)/target/saap.xml
     
 
 # Upper code is proper don't touch=========================
@@ -82,14 +82,34 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'cat /c:/agent/_work/1/a/target/saap.xml'
+    script: 'count=1
+      result=`cat /home/vsts/work/1/s/target/saap.xml | awk -F "[><]" ''/EX_V_RESULT/{print $3}''`
+      echo "Result: $result"
+       
+      item="$(grep -c ''</item>'' /home/vsts/work/1/s/target/saap.xml)"
+      echo "TotalItem: $item"
+       
+      cat /home/vsts/work/1/s/target/saap.xml  | awk -F "[><]"  ''/TEXT|LINE/{print $3}''  |sed ''$!N;s/\n/;/''>linetext.log
+       
+      cat linetext.log |while read linedata
+      do
+         TEXT=$(echo $linedata |awk -F ";" ''{print $1}'')
+         LINE=$(echo $linedata |awk -F ";" ''{print $2}'')
+         if [ $item -ne $count ]
+         then
+           echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}," >>outlinetext.log
+         else
+          echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}" >>outlinetext.log
+         fi
+         count=`expr $count + 1`
+       
+      done
+       
+      echo  -e "{     \n
+          \"itemTotal\": \"$item\", \n\t
+          \"result\": \"$result\", \n\t
+          $(cat outlinetext.log)
+      }\n">/$(System.DefaultWorkingDirectory)/target/test.json'
 
-# - task: CmdLine@2
-#   inputs:
-#     script: 'cat $(System.DefaultWorkingDirectory)/target/saap.xml'
 
-# - task: PowerShell@2
-#   inputs:
-#     targetType: 'inline'
-#     script: 'cat /home/vsts/work/1/s/target/saap.xml'
 
