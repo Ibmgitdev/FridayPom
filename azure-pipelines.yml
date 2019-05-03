@@ -70,7 +70,7 @@ steps:
 - script:
     ls -l
 - script:
-    cd target
+    cd $(System.DefaultWorkingDirectory)/target
 - script:
     ls -l
     # cat $(System.DefaultWorkingDirectory)/target/saap.xml
