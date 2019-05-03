@@ -64,8 +64,11 @@ steps:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/saap.xml'
   name: 'drill'
 
+
+
 - script:
-    #cat $(System.DefaultWorkingDirectory)/target/saap.xml
+    cat $(System.DefaultWorkingDirectory)/target/saap.xml
+- script:
     sudo cat `$(System.DefaultWorkingDirectory)/target/saap.xml`
 
 # Upper code is proper don't touch=========================
