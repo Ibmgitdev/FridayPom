@@ -88,7 +88,7 @@ steps:
   name: 'script'
 
 - task: ArchiveFiles@2
-  displayName: "Script Log File"
+  displayName: "Script Log File for output"
   inputs:
       rootFolderOrFile: "$(Build.Repository.LocalPath)"
       includeRootFolder: false
