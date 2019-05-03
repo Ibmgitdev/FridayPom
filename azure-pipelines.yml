@@ -65,9 +65,8 @@ steps:
   name: 'drill'
 
 - script:
-    echo "popo"
-    
-    cat "$(System.DefaultWorkingDirectory)/target/saap.xml"
+    cat $(System.DefaultWorkingDirectory)/target/saap.xml
+    cat "Test"
 
 # Upper code is proper don't touch=========================
 # This is bash script======================================
