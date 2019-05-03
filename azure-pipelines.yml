@@ -65,14 +65,14 @@ steps:
   name: 'drill'
 
 # Upper code is proper don't touch=========================
-# - script:
-#     cd $(System.DefaultWorkingDirectory)
-# - script:
-#     ls -l
-# - script:
-#     cd $(System.DefaultWorkingDirectory)/target
-# - script:
-#     ls -l
+- script:
+    cd $(System.DefaultWorkingDirectory)
+- script:
+    ls -l
+- script:
+    cd $(System.DefaultWorkingDirectory)/target
+- script:
+    ls -l
     # cat $(System.DefaultWorkingDirectory)/target/saap.xml
     # sudo cat $($(System.DefaultWorkingDirectory)/target/saap.xml)
 
