@@ -79,16 +79,17 @@ steps:
 # Upper code is proper don't touch=========================
 # This is bash script======================================
 
-# - task: Bash@3
-#   inputs:
-#     targetType: 'inline'
-#     script: 'cat $(System.DefaultWorkingDirectory)/target/saap.xml'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'cat c:/agent/_work/1/a/target/saap.xml'
 
 # - task: CmdLine@2
 #   inputs:
 #     script: 'cat $(System.DefaultWorkingDirectory)/target/saap.xml'
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'cat /home/vsts/work/1/s/target/saap.xml'
+# - task: PowerShell@2
+#   inputs:
+#     targetType: 'inline'
+#     script: 'cat /home/vsts/work/1/s/target/saap.xml'
+
