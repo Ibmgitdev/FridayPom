@@ -69,8 +69,10 @@ steps:
     cd $(System.DefaultWorkingDirectory)
 - script:
     ls -l
-    # cd target
-    # ls -l
+- script:
+    cd target
+- script:
+    ls -l
     # cat $(System.DefaultWorkingDirectory)/target/saap.xml
     # sudo cat $($(System.DefaultWorkingDirectory)/target/saap.xml)
 
