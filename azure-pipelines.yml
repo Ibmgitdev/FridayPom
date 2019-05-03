@@ -67,9 +67,10 @@ steps:
 # Upper code is proper don't touch=========================
 - script:
     cd $(System.DefaultWorkingDirectory)
+- script:
     ls -l
-    cd target
-    ls -l
+    # cd target
+    # ls -l
     # cat $(System.DefaultWorkingDirectory)/target/saap.xml
     # sudo cat $($(System.DefaultWorkingDirectory)/target/saap.xml)
 
