@@ -74,6 +74,8 @@ steps:
 - script: |
     cd /home/vsts/work/1/s/target
     ls -l
+    awk -F "[><]" ''/EX_V_RESULT/{print $3}'' /home/vsts/work/1/s/target/saap.xml
+    
   # wc /home/vsts/work/1/s/target/saap.xml
 
 # sudo cat $($(System.DefaultWorkingDirectory)/target/saap.xml)
