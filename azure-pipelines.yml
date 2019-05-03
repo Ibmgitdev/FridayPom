@@ -74,8 +74,7 @@ steps:
 - script: |
     cd /home/vsts/work/1/s/target
     ls -l
-    cat surefire-reports
-    tail saap.xml
+    head -c 100 /home/vsts/work/1/s/target/saap.xml
 
 # sudo cat $($(System.DefaultWorkingDirectory)/target/saap.xml)
 
