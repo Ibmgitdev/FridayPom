@@ -101,7 +101,7 @@ steps:
       echo  -e "{     \n
           \"itemTotal\": \"$item\", \n\t
           \"result\": \"$result\", \n\t
-          $(cat outlinetext.log)
+          $(cat $(System.DefaultWorkingDirectory)/target/outlinetext.log)
       }\n">$(System.DefaultWorkingDirectory)/target/test.json
        
       rm -f $(System.DefaultWorkingDirectory)/target/outlinetext.log
