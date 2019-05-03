@@ -71,7 +71,7 @@ steps:
     ls -l
 - script:
     pwd
-- script:
+- script: |
     cd /home/vsts/work/1/s/target
     ls -l
 #     pwd
