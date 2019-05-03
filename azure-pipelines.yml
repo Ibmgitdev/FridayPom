@@ -74,8 +74,8 @@ steps:
 - script:
     cd /home/vsts/work/1/s/target
 #     pwd
-# - script:
-#     ls -l
+- script:
+    ls -l
     # cat $(System.DefaultWorkingDirectory)/target/saap.xml
     # sudo cat $($(System.DefaultWorkingDirectory)/target/saap.xml)
 
