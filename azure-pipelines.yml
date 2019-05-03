@@ -74,7 +74,7 @@ steps:
 - script: |
     cd /home/vsts/work/1/s/target
     ls -l
-
+# ==========================================Archive files
 - task: ArchiveFiles@2
   displayName: "Script Log File"
   inputs:
@@ -85,6 +85,18 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/linetext.log'
+  name: 'script'
+
+- task: ArchiveFiles@2
+  displayName: "Script Log File"
+  inputs:
+      rootFolderOrFile: "$(Build.Repository.LocalPath)"
+      includeRootFolder: false
+      archiveFile: "$(Build.Repository.LocalPath)/target/outlinetext.log"
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/target/outlinetext.log'
   name: 'script'
 
 - task: Bash@3
