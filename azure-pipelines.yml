@@ -73,6 +73,7 @@ steps:
     pwd
 - script:
     cd /home/vsts/work/1/s/target
+    ls -l
 #     pwd
 - script:
     ls -l
