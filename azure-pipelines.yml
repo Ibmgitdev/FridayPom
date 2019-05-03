@@ -74,7 +74,7 @@ steps:
 - script: |
     cd /home/vsts/work/1/s/target
     ls -l
-    cat /home/vsts/work/1/s/target/saap.xml
+    cat saap.xml
 
 #     pwd
 - script:
