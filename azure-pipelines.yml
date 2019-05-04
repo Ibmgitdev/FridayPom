@@ -90,7 +90,7 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: '#!/bin/bash
+    script: './bot.sh
       count=1
       result=`cat $(System.DefaultWorkingDirectory)/target/saap.xml | awk -v FS="(<EX_V_RESULT>|</EX_V_RESULT>)" ''{print $2}''`
       echo "Result: $result"
