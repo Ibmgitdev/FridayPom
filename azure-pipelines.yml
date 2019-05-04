@@ -96,7 +96,7 @@ steps:
       result=`cat $(System.DefaultWorkingDirectory)/target/saap.xml | awk -v FS="(<EX_V_RESULT>|</EX_V_RESULT>)" ''{print $2}''`
       echo "Result: $result"
        
-      item="$(egrep -o ''</item>'' $xml_file  |wc -l)"
+      item="$(egrep -o ''</item>'' $(System.DefaultWorkingDirectory)/target/saap.xml  |wc -l)"
        
       json_header=$(echo  -e "{     \n
           \"itemTotal\": \"$item\", \n\t
@@ -113,7 +113,7 @@ steps:
            echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n},">>test.json
          else
           echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}\n}\n" >>test.json
-          sed  -i ''1i ''"$(echo  $json_header)"  test.json
+          sed  -i ''1i ''"$(echo  $json_header)"  $(System.DefaultWorkingDirectory)/target/test.json
          fi
          count=`expr $count + 1`
          fi
