@@ -116,7 +116,7 @@ steps:
          fi
          count=`expr $count + 1`
          fi
-      done'
+      '
 
 # - task: Bash@3
 #   inputs:
