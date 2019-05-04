@@ -91,7 +91,7 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: '#!/bin/sh
+    script: '#!/bin/bash
       count=1
       result=`cat $xml_file | awk -v FS="(<EX_V_RESULT>|</EX_V_RESULT>)" ''{print $2}''`
       echo "Result: $result"
