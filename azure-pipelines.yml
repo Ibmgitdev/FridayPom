@@ -97,11 +97,11 @@ steps:
        
       item="$(egrep -o ''</item>'' $(System.DefaultWorkingDirectory)/target/saap.xml  |wc -l)"
        
-      json_header=$(echo  -e "{     \n
+      json_header=$(echo -e "{     \n
           \"itemTotal\": \"$item\", \n\t
           \"result\": \"$result\",\n")
        
-      cat $xml_file | egrep -oE ''(<LINE>[^<]*</LINE>|<TEXT>[^<]*</TEXT>)''  | sed  -e ''s:<LINE>::g'' -e ''s:</LINE>::g'' -e ''s:<TEXT>::g'' -e ''s:</TEXT>::g'' |sed ''$!N;s/\n/;/'' |while read linedata
+      cat $xml_file | egrep -oE ''(<LINE>[^<]*</LINE>|<TEXT>[^<]*</TEXT>)'' | sed -e ''s:<LINE>::g'' -e ''s:</LINE>::g'' -e ''s:<TEXT>::g'' -e ''s:</TEXT>::g'' |sed ''$!N;s/\n/;/'' |while read linedata
       do
          if [ "$linedata" != "" ]
          then
@@ -109,10 +109,10 @@ steps:
          LINE=$(echo $linedata |awk -F ";" ''{print $2}'')
          if [ $item -ne $count ]
          then
-           echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n},">>test.json
+           echo -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n},">>test.json
          else
-          echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}\n}\n" >>test.json
-          sed  -i ''1i ''"$(echo  $json_header)"  $(System.DefaultWorkingDirectory)/target/test.json
+          echo -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}\n}\n" >>test.json
+          sed -i ''1i ''"$(echo $json_header)"  $(System.DefaultWorkingDirectory)/target/test.json
          fi
          count=`expr $count + 1`
          fi
