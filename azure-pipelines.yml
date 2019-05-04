@@ -91,38 +91,69 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: #!/bin/sh
-     'count=1
+    script: '!#/bin/sh
+      count=1
       result=`cat $(System.DefaultWorkingDirectory)/target/saap.xml | awk -v FS="(<EX_V_RESULT>|</EX_V_RESULT>)" ''{print $2}''`
       echo "Result: $result"
        
-      #item="$(grep -c ''</item>'' $(System.DefaultWorkingDirectory)/target/saap.xml)"
-      item="$(egrep -o ''</item>'' $(System.DefaultWorkingDirectory)/target/saap.xml  |wc -l)"
-      echo "TotalItem: $item"
-      cat $(System.DefaultWorkingDirectory)/target/saap.xml | egrep -oE ''(<LINE>[^<]*</LINE>|<TEXT>[^<]*</TEXT>)''  | sed  -e ''s:<LINE>::g'' -e ''s:</LINE>::g'' -e ''s:<TEXT>::g'' -e ''s:</TEXT>::g'' |sed ''$!N;s/\n/;/''>linetext.log
+      item="$(egrep -o ''</item>'' $xml_file  |wc -l)"
        
-      cat linetext.log |while read linedata
+      json_header=$(echo  -e "{     \n
+          \"itemTotal\": \"$item\", \n\t
+          \"result\": \"$result\",\n")
+       
+      cat $xml_file | egrep -oE ''(<LINE>[^<]*</LINE>|<TEXT>[^<]*</TEXT>)''  | sed  -e ''s:<LINE>::g'' -e ''s:</LINE>::g'' -e ''s:<TEXT>::g'' -e ''s:</TEXT>::g'' |sed ''$!N;s/\n/;/'' |while read linedata
       do
+         if [ "$linedata" != "" ]
+         then
          TEXT=$(echo $linedata |awk -F ";" ''{print $1}'')
          LINE=$(echo $linedata |awk -F ";" ''{print $2}'')
          if [ $item -ne $count ]
          then
-           echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}," >>outlinetext.log
+           echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n},">>test.json
          else
-          echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}" >>outlinetext.log
+          echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}\n}\n" >>test.json
+          sed  -i ''1i ''"$(echo  $json_header)"  test.json
          fi
          count=`expr $count + 1`
+         fi
+      done'
+
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: #!/bin/sh
+#      'count=1
+#       result=`cat $(System.DefaultWorkingDirectory)/target/saap.xml | awk -v FS="(<EX_V_RESULT>|</EX_V_RESULT>)" ''{print $2}''`
+#       echo "Result: $result"
        
-      done
+#       #item="$(grep -c ''</item>'' $(System.DefaultWorkingDirectory)/target/saap.xml)"
+#       item="$(egrep -o ''</item>'' $(System.DefaultWorkingDirectory)/target/saap.xml  |wc -l)"
+#       echo "TotalItem: $item"
+#       cat $(System.DefaultWorkingDirectory)/target/saap.xml | egrep -oE ''(<LINE>[^<]*</LINE>|<TEXT>[^<]*</TEXT>)''  | sed  -e ''s:<LINE>::g'' -e ''s:</LINE>::g'' -e ''s:<TEXT>::g'' -e ''s:</TEXT>::g'' |sed ''$!N;s/\n/;/''>linetext.log
        
-      echo  -e "{     \n
-          \"itemTotal\": \"$item\", \n\t
-          \"result\": \"$result\", \n\t
-          $(cat outlinetext.log)
-      }\n">$(System.DefaultWorkingDirectory)/target/test.json
+#       cat linetext.log |while read linedata
+#       do
+#          TEXT=$(echo $linedata |awk -F ";" ''{print $1}'')
+#          LINE=$(echo $linedata |awk -F ";" ''{print $2}'')
+#          if [ $item -ne $count ]
+#          then
+#            echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}," >>outlinetext.log
+#          else
+#           echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}" >>outlinetext.log
+#          fi
+#          count=`expr $count + 1`
        
-      rm -f outlinetext.log
-      rm -f linetext.log'
+#       done
+       
+#       echo  -e "{     \n
+#           \"itemTotal\": \"$item\", \n\t
+#           \"result\": \"$result\", \n\t
+#           $(cat outlinetext.log)
+#       }\n">$(System.DefaultWorkingDirectory)/target/test.json
+       
+#       rm -f outlinetext.log
+#       rm -f linetext.log'
 
 # - task: Bash@3
 #   inputs:
