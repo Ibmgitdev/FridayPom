@@ -91,7 +91,7 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: '#/bin/sh
+    script: '#!/bin/sh
       count=1
       result=`cat $xml_file | awk -v FS="(<EX_V_RESULT>|</EX_V_RESULT>)" ''{print $2}''`
       echo "Result: $result"
@@ -110,10 +110,10 @@ steps:
          LINE=$(echo $linedata |awk -F ";" ''{print $2}'')
          if [ $item -ne $count ]
          then
-           echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n},">>$(System.DefaultWorkingDirectory)/target/test.json
+           echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n},"
          else
-          echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}\n}\n" >>$(System.DefaultWorkingDirectory)/target/test.json
-          sed  -i ''1i ''"$(echo  $json_header)"  $(System.DefaultWorkingDirectory)/target/test.json
+          echo  -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}\n}\n"
+          sed  -i ''1i ''"$(echo  $json_header)"  
          fi
          count=`expr $count + 1`
          fi
