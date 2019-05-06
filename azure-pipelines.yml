@@ -86,7 +86,7 @@ steps:
 #     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/test.json'
 #   name: 'TestJson'
 #=======================================
-#===============================================Nanda
+#===============================================From Nanda
 - script: |
     cd /home/vsts/work/
     mkdir azurefiles 
