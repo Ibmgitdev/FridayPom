@@ -20,24 +20,24 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: ArchiveFiles@2
-  displayName: "Archive files"
-  inputs:
-      rootFolderOrFile: "$(Build.Repository.LocalPath)"
-      includeRootFolder: false
-      archiveFile: "$(Build.Repository.LocalPath)/target/helloworld.war"
+# - task: ArchiveFiles@2
+#   displayName: "Archive files"
+#   inputs:
+#       rootFolderOrFile: "$(Build.Repository.LocalPath)"
+#       includeRootFolder: false
+#       archiveFile: "$(Build.Repository.LocalPath)/target/helloworld.war"
 
-- task: ArchiveFiles@2
-  displayName: "Archive files"
-  inputs:
-      rootFolderOrFile: "$(Build.Repository.LocalPath)"
-      includeRootFolder: false
-      archiveFile: "$(Build.Repository.LocalPath)/target/saap.xml"
+# - task: ArchiveFiles@2
+#   displayName: "Archive files"
+#   inputs:
+#       rootFolderOrFile: "$(Build.Repository.LocalPath)"
+#       includeRootFolder: false
+#       archiveFile: "$(Build.Repository.LocalPath)/target/saap.xml"
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)/target/helloworld.war'
-  name: 'drop'
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/helloworld.war'
+#   name: 'drop'
 
 - task: CmdLine@2
   inputs:
@@ -58,10 +58,10 @@ steps:
    </soapenv:Body>
 </soapenv:Envelope>'' > $(System.DefaultWorkingDirectory)/target/saap.xml'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)/target/saap.xml'
-  name: 'drill'
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/saap.xml'
+#   name: 'drill'
 
 # Upper code is proper don't touch=========================
 - script:
@@ -87,48 +87,49 @@ steps:
 #   name: 'TestJson'
 #=======================================
 #===============================================Nanda
-# - script: |
-#     cd /Users/ibmadmin/Documents/SFWorkspace
-#     rm -rf /Users/ibmadmin/Documents/SFWorkspace/*
-#     git clone -b $(Build.SourceBranchName) git@ssh.dev.azure.com:v3/kpatelk2010/PomFri/PomFri
-
-# - task: ShellScript@2
-#   inputs:
-#     scriptPath: /Users/ibmadmin/Documents/AzureScripts/AzureBuildScripts/SlackIntegration.sh
-#     args: 'testResult.json $(System.TeamProject) $(Build.SourceBranchName)'
-#   displayName: 'Slack notification'
-
-#===============================================
+- script: |
+    cd /home/vsts/work/
+    mkdir azurefiles 
+    cd /home/vsts/work/azurefiles
+    git clone -b $(Build.SourceBranchName) git@ssh.dev.azure.com:v3/kpatelk2010/PomFri/PomFri
 
   displayName: "Download/Clone Artifacts"
 
-- task: Bash@3
+- task: ShellScript@2
   inputs:
-    targetType: 'inline'
-    script: '#!/bin/sh
-      count=1
-      result=`cat $(System.DefaultWorkingDirectory)/target/saap.xml | awk -v FS="(<EX_V_RESULT>|</EX_V_RESULT>)" ''{print $2}''`
-      echo "Result: $result"
+    scriptPath: /home/vsts/work/azurefiles/ForUnstructure.sh
+  displayName: 'Execution of xml'
+
+
+
+
+# - task: ShellScript@2
+#   inputs:
+#     targetType: 'inline'
+#     script: '#!/bin/sh
+#       count=1
+#       result=`cat $(System.DefaultWorkingDirectory)/target/saap.xml | awk -v FS="(<EX_V_RESULT>|</EX_V_RESULT>)" ''{print $2}''`
+#       echo "Result: $result"
        
-      item="$(egrep -o ''</item>'' $(System.DefaultWorkingDirectory)/target/saap.xml  |wc -l)"
+#       item="$(egrep -o ''</item>'' $(System.DefaultWorkingDirectory)/target/saap.xml  |wc -l)"
        
-      json_header=$(echo -e "{     \n
-          \"itemTotal\": \"$item\", \n\t
-          \"result\": \"$result\",\n")
+#       json_header=$(echo -e "{     \n
+#           \"itemTotal\": \"$item\", \n\t
+#           \"result\": \"$result\",\n")
        
-      cat $xml_file | egrep -oE ''(<LINE>[^<]*</LINE>|<TEXT>[^<]*</TEXT>)'' | sed -e ''s:<LINE>::g'' -e ''s:</LINE>::g'' -e ''s:<TEXT>::g'' -e ''s:</TEXT>::g'' |sed ''$!N;s/\n/;/'' |while read linedata
-      do
-         if [ "$linedata" != "" ]
-         then
-         TEXT=$(echo $linedata |awk -F ";" ''{print $1}'')
-         LINE=$(echo $linedata |awk -F ";" ''{print $2}'')
-         if [ $item -ne $count ]
-         then
-           echo -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n},">>test.json
-         else
-          echo -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}\n}\n" >>test.json
-          sed -i ''1i ''"$(echo $json_header)"  $(System.DefaultWorkingDirectory)/target/test.json
-         fi
-         count=`expr $count + 1`
-         fi
-      done'
+#       cat $xml_file | egrep -oE ''(<LINE>[^<]*</LINE>|<TEXT>[^<]*</TEXT>)'' | sed -e ''s:<LINE>::g'' -e ''s:</LINE>::g'' -e ''s:<TEXT>::g'' -e ''s:</TEXT>::g'' |sed ''$!N;s/\n/;/'' |while read linedata
+#       do
+#          if [ "$linedata" != "" ]
+#          then
+#          TEXT=$(echo $linedata |awk -F ";" ''{print $1}'')
+#          LINE=$(echo $linedata |awk -F ";" ''{print $2}'')
+#          if [ $item -ne $count ]
+#          then
+#            echo -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n},">>test.json
+#          else
+#           echo -e "\n\t\"issues$count\": {\n\t\t\"line\": \"$LINE\",\n\t\t \"text\": \"$TEXT\"\n}\n}\n" >>test.json
+#           sed -i ''1i ''"$(echo $json_header)"  $(System.DefaultWorkingDirectory)/target/test.json
+#          fi
+#          count=`expr $count + 1`
+#          fi
+#       done'
