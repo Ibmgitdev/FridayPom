@@ -87,6 +87,13 @@ steps:
 #   name: 'TestJson'
 #=======================================
 
+- script: |
+    cd /Users/ibmadmin/Documents/SFWorkspace
+    rm -rf /Users/ibmadmin/Documents/SFWorkspace/*
+    git clone -b $(Build.SourceBranchName) git@ssh.dev.azure.com:v3/kpatelk2010/PomFri/PomFri
+
+  displayName: "Download/Clone Artifacts"
+
 - task: Bash@3
   inputs:
     targetType: 'inline'
