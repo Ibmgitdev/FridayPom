@@ -86,11 +86,19 @@ steps:
 #     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/test.json'
 #   name: 'TestJson'
 #=======================================
+#===============================================Nanda
+# - script: |
+#     cd /Users/ibmadmin/Documents/SFWorkspace
+#     rm -rf /Users/ibmadmin/Documents/SFWorkspace/*
+#     git clone -b $(Build.SourceBranchName) git@ssh.dev.azure.com:v3/kpatelk2010/PomFri/PomFri
 
-- script: |
-    cd /Users/ibmadmin/Documents/SFWorkspace
-    rm -rf /Users/ibmadmin/Documents/SFWorkspace/*
-    git clone -b $(Build.SourceBranchName) git@ssh.dev.azure.com:v3/kpatelk2010/PomFri/PomFri
+# - task: ShellScript@2
+#   inputs:
+#     scriptPath: /Users/ibmadmin/Documents/AzureScripts/AzureBuildScripts/SlackIntegration.sh
+#     args: 'testResult.json $(System.TeamProject) $(Build.SourceBranchName)'
+#   displayName: 'Slack notification'
+
+#===============================================
 
   displayName: "Download/Clone Artifacts"
 
